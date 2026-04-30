@@ -1,0 +1,29 @@
+version: "3.9"
+
+services:
+
+  backend:
+    build: .
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: fish
+      POSTGRES_PASSWORD: fish123
+      POSTGRES_DB: fishdb
+    ports:
+      - "5432:5432"
+
+  chatwoot:
+    image: chatwoot/chatwoot:latest
+    ports:
+      - "3000:3000"
+
+  evolution:
+    image: atendai/evolution-api
+    ports:
+      - "8080:8080"
